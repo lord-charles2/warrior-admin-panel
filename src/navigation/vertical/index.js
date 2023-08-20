@@ -63,16 +63,6 @@ const navigation = () => {
     {
       sectionTitle: 'Catalog Management'
     },
-    {
-      title: 'Add product',
-      path: '/products/addproduct',
-      icon: Cart
-    },
-    {
-      title: 'Product list',
-      path: '/products/productlist',
-      icon: Cart
-    },
 
     {
       title: 'Create Category',
@@ -94,6 +84,16 @@ const navigation = () => {
       path: '/brand/brandlist',
       icon: StarCircleOutline
     },
+    {
+      title: 'Add product',
+      path: '/products/addproduct',
+      icon: Cart
+    },
+    {
+      title: 'Product list',
+      path: '/products/productlist',
+      icon: Cart
+    },
 
     // {
     //   title: 'Add Color',
@@ -106,7 +106,7 @@ const navigation = () => {
     //   icon: Eyedropper
     // },
     {
-      title: 'Add To Flash Sale',
+      title: 'Create Flash Sale',
       path: '/flashsale/addtoflashsale',
       icon: BoltIcon
     },
