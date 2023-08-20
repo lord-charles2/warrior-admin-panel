@@ -221,7 +221,7 @@ const RegisterPage = () => {
                 fontSize: '1.3rem !important'
               }}
             >
-              Warrior
+              Warrior ADMIN PANEL
             </Typography>
           </Box>
           <Box sx={{ mb: 6 }}>
