@@ -7,7 +7,7 @@ const notify = message => toast.success(message)
 const notify2 = message => toast.error(message)
 
 export const getProductCategories = async () => {
-  const response = await axios.get(`${base_url}category/`)
+  const response = await axios.get(`${base_url}advancedCategory/`)
 
   return response.data
 }
@@ -28,7 +28,8 @@ export const createCategory = async (
       headers: config(token).headers
     })
     console.log(token)
-    const response = await api.post('categories/', category, config(token))
+    const response = await api.post('advancedCategory/', category, config(token))
+    console.log(response)
     if (response.data.success) {
       notify('Category added successfully')
       setSuccessRateCategory(true)
@@ -45,8 +46,6 @@ export const createCategory = async (
       setSuccessRateCategory2(false)
       setBtnActive(true)
     }
-
-    console.log(response)
 
     return response.data
   } catch (err) {
@@ -72,12 +71,12 @@ export const createCategory = async (
       setBtnActive(true)
     }
 
-    console.log(err.message)
+    console.log(err)
   }
 }
 
 export const getProductCategory = async id => {
-  const response = await axios.get(`${base_url}category/${id}`, config)
+  const response = await axios.get(`${base_url}advancedCategory/${id}`, config)
 
   return response.data
 }
