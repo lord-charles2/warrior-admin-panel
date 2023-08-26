@@ -29,7 +29,8 @@ export const createCategory = async (
     })
     console.log(token)
     const response = await api.post('advancedCategory/', category, config(token))
-    console.log(response)
+
+    // console.log(response)
     if (response.data.success) {
       notify('Category added successfully')
       setSuccessRateCategory(true)

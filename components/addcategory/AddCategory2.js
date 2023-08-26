@@ -35,7 +35,6 @@ export default function Addcategory2({ handleNext }) {
     title: category,
     icon
   }
-  console.log(categoryData)
 
   //   const successRateBrand = getsuccessFromLocalStorage.state.successRateBrand
   const handleNextPage = () => {

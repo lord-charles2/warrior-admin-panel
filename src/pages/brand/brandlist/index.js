@@ -119,6 +119,7 @@ const TableCustomized = () => {
   const [collectionName, setcollectionName] = useState('')
   const [openDialog, setOpenDialog] = useState(false)
   const [openDialog2, setOpenDialog2] = useState(false)
+  const [image, setImage] = useState('')
 
   const inputDate1 = new Date(date)
   const outputDate1 = new Date(inputDate1.setHours(inputDate1.getHours() + 3)).toISOString()
@@ -129,11 +130,14 @@ const TableCustomized = () => {
   const subData = {
     items: [
       {
-        title: subTitle
+        title: subTitle,
+        image: image
       }
     ],
     name: collectionName
   }
+
+  console.log(subData)
 
   const handleChangePage = (event, newPage) => {
     setPage(newPage)
@@ -231,6 +235,7 @@ const TableCustomized = () => {
             resolve()
             setSubTitle(response.data.advancedSubcategory?.items[0]?.title)
             setcollectionName(response.data.advancedSubcategory?.name)
+            setImage(response.data.advancedSubcategory?.items[0]?.image)
           }
           if (response.data.err == 'Not Authorized token expired, Please Login again') {
             notify2(response.data.err)
@@ -493,6 +498,17 @@ const TableCustomized = () => {
                       variant='outlined'
                       value={collectionName}
                       onChange={event => setcollectionName(event.target.value)}
+                    />
+                  </Grid>
+
+                  <Grid item xs={12} md={8} className='pb-[20px]'>
+                    <TextField
+                      required
+                      id='image url'
+                      label='image url'
+                      variant='outlined'
+                      value={image}
+                      onChange={event => setImage(event.target.value)}
                     />
                   </Grid>
 
