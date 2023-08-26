@@ -62,7 +62,8 @@ export default function PaymentForm({ handleNext }) {
   const categoryData = {
     title: category,
     title2: subcategory,
-    productId: productId
+    productId: productId,
+    icon: ''
   }
 
   console.log(categoryData)

@@ -28,7 +28,7 @@ export const createCategory = async (
       headers: config(token).headers
     })
     console.log(token)
-    const response = await api.post('advancedCategory/', category, config(token))
+    const response = await api.post('categories/', category, config(token))
 
     // console.log(response)
     if (response.data.success) {
