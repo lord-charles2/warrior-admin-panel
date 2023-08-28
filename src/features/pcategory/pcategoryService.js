@@ -76,6 +76,70 @@ export const createCategory = async (
   }
 }
 
+export const createCategory2 = async (
+  category,
+  token,
+  setSuccessRateCategory,
+  setSuccessRateCategory2,
+  handleNextPage,
+  setBtnActive
+) => {
+  try {
+    setBtnActive(false)
+
+    const api = axios.create({
+      baseURL: base_url,
+      headers: config(token).headers
+    })
+    console.log(token)
+    const response = await api.post('advancedCategory/', category, config(token))
+
+    // console.log(response)
+    if (response.data.success) {
+      notify('Category added successfully')
+      setSuccessRateCategory(true)
+      setSuccessRateCategory2(true)
+
+      setTimeout(() => {
+        handleNextPage()
+      }, 3000)
+      setBtnActive(true)
+    }
+    if (response.data.err == 'Not Authorized token expired, Please Login again') {
+      notify2(response.data.err)
+      setSuccessRateCategory(false)
+      setSuccessRateCategory2(false)
+      setBtnActive(true)
+    }
+
+    return response.data
+  } catch (err) {
+    if (err.response?.data.message == 'Category added successfully') {
+      return (
+        notify(err.response.data.message),
+        setSuccessRateCategory(true),
+        setSuccessRateCategory2(true),
+        setTimeout(() => {
+          handleNextPage()
+        }, 3000),
+        setBtnActive(true)
+      )
+    }
+    if (err.response?.data.message == 'Product not found') {
+      notify2(err.response.data.message)
+      setSuccessRateCategory(false)
+      setBtnActive(true)
+    }
+    if (err.message == 'Network Error') {
+      setSuccessRateCategory2(false)
+      handleNextPage()
+      setBtnActive(true)
+    }
+
+    console.log(err)
+  }
+}
+
 export const getProductCategory = async id => {
   const response = await axios.get(`${base_url}advancedCategory/${id}`, config)
 

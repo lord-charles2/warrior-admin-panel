@@ -9,7 +9,7 @@ import Autocomplete from '@mui/material/Autocomplete'
 import { useState } from 'react'
 import { Button } from '@mui/material'
 import { toast, Toaster } from 'react-hot-toast'
-import { createCategory } from 'src/features/pcategory/pcategoryService'
+import { createCategory, createCategory2 } from 'src/features/pcategory/pcategoryService'
 import useStore3 from 'utils/Store3'
 
 import Cookies from 'js-cookie'
@@ -49,7 +49,7 @@ export default function Addcategory2({ handleNext }) {
 
   const handleAddProductDetails = () => {
     setBtnActive(false)
-    createCategory(categoryData, token, setSuccessRateCategory, setSuccessRateCategory2, handleNextPage, setBtnActive)
+    createCategory2(categoryData, token, setSuccessRateCategory, setSuccessRateCategory2, handleNextPage, setBtnActive)
   }
 
   return (
