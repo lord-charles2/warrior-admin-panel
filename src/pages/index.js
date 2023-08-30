@@ -130,7 +130,7 @@ const Index = () => {
 
         const myPromise = new Promise(async (resolve, reject) => {
           try {
-            const response = await axios.post(`${base_url}user/login`, user)
+            const response = await axios.post(`${base_url}user/login/by-email`, user)
             if (response.status === 200) {
               resolve()
 
