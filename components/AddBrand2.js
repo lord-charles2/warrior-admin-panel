@@ -7,16 +7,16 @@ import Checkbox from '@mui/material/Checkbox'
 import { useState } from 'react'
 import { Autocomplete, Backdrop, Button, CircularProgress } from '@mui/material'
 import { createSubCategory } from 'src/features/brand/brandService'
-import { toast, Toaster } from 'react-hot-toast'
+import { Toaster, toast } from 'react-hot-toast'
 import Cookies from 'js-cookie'
-import { Box } from 'mdi-material-ui'
 import { useEffect } from 'react'
 import axios from 'axios'
 import { base_url } from 'utils/baseUrl'
 import config from 'utils/axiosconfig'
 
-export default function AddBrand({ handleNext }) {
+export default function AddBrand() {
   const [backdrop, setBackdrop] = useState(false)
+  const notify2 = error => toast.error(error)
 
   const token = Cookies.get('token')
 
@@ -25,8 +25,6 @@ export default function AddBrand({ handleNext }) {
   const [collectionName, setCollectionName] = useState('')
   const [subTitle, setSubTitle] = useState('')
   const [categories, setCategories] = useState([])
-  const [name, setName] = useState('')
-  const [subId, setSubId] = useState('')
 
   const subData = {
     name: collectionName,
@@ -50,8 +48,6 @@ export default function AddBrand({ handleNext }) {
         headers: config(token).headers
       })
       const response = await api.get(`advancedCategory/`, config(token))
-
-      console.log(response.data.advancedCategories)
 
       if (response.data.success) {
         setCategories(response.data.advancedCategories)

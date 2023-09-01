@@ -31,23 +31,12 @@ import Image from 'next/image'
 import menu from '/public/images/menu.svg'
 import Backdrop from '@mui/material/Backdrop'
 import CircularProgress from '@mui/material/CircularProgress'
-import { parseISO } from 'date-fns'
 import Dialog from '@mui/material/Dialog'
 import DialogActions from '@mui/material/DialogActions'
 import DialogContent from '@mui/material/DialogContent'
 import DialogContentText from '@mui/material/DialogContentText'
 import DialogTitle from '@mui/material/DialogTitle'
 import Slide from '@mui/material/Slide'
-
-// ** Third Party Imports
-import DatePicker from 'react-datepicker'
-
-// ** Third Party Styles Imports
-import 'react-datepicker/dist/react-datepicker.css'
-
-// ** Styled Components
-import DatePickerWrapper from 'src/@core/styles/libs/react-datepicker'
-import Link from 'next/link'
 
 const notify2 = message => toast.error(message)
 const notify = message => toast.success(message)
@@ -104,12 +93,10 @@ const TableCustomized = () => {
   const [subId, setsubId] = useState('')
   const [backdrop, setBackdrop] = useState(false)
   const [inActive, setInactiveStatus] = useState(false)
-  const [active, setactiveStatus] = useState(false)
   const [allflash, setallflashStatus] = useState(false)
-  const [deleteAllInactiveBtn, setdeleteAllInactiveBtn] = useState(false)
+
   const [categories, setCategories] = useState([])
   const [subCategories, setSubCategories] = useState([])
-  const [activeCategory, setActiveCategory] = useState('')
   const [viewCategoryName, setViewCategoryName] = useState('')
 
   const [date, setDate] = useState(null)
@@ -121,12 +108,6 @@ const TableCustomized = () => {
   const [openDialog2, setOpenDialog2] = useState(false)
   const [image, setImage] = useState('')
 
-  const inputDate1 = new Date(date)
-  const outputDate1 = new Date(inputDate1.setHours(inputDate1.getHours() + 3)).toISOString()
-
-  const inputDate2 = new Date(date2)
-  const outputDate2 = new Date(inputDate2.setHours(inputDate2.getHours() + 3)).toISOString()
-
   const subData = {
     items: [
       {
@@ -137,8 +118,6 @@ const TableCustomized = () => {
     name: collectionName
   }
 
-  console.log(subData)
-
   const handleChangePage = (event, newPage) => {
     setPage(newPage)
   }
@@ -146,40 +125,6 @@ const TableCustomized = () => {
   const handleChangeRowsPerPage = event => {
     setRowsPerPage(+event.target.value)
     setPage(0)
-  }
-  console.log(activeCategory)
-
-  const getCategory = async () => {
-    try {
-      const token = Cookies.get('token')
-
-      const api = axios.create({
-        baseURL: base_url,
-        headers: config(token).headers
-      })
-      const response = await api.get(`flashSale/all/`, config(token))
-
-      console.log(response.data)
-
-      if (response.data.success) {
-        setFlash(response.data.flashSaleProducts)
-        setallflashStatus(true)
-        response.data.flashSaleProducts.length < 1 ? setInactiveStatus(true) : null
-
-        setBackdrop(false)
-      }
-      if (response.data.err == 'Not Authorized token expired, Please Login again') {
-        notify2(response.data.err)
-      }
-
-      // console.log(response)
-    } catch (err) {
-      console.log(err)
-      if (err.message == 'Network Error') {
-        notify2(err.message)
-        setBackdrop(false)
-      }
-    }
   }
 
   const getSubCategory = async id => {
@@ -197,7 +142,6 @@ const TableCustomized = () => {
 
       if (response.data.success) {
         setSubCategories(response.data.advancedCategory)
-        setallflashStatus(true)
         response.data.advancedCategory.length < 1 ? setInactiveStatus(true) : null
 
         setBackdrop(false)
@@ -365,7 +309,6 @@ const TableCustomized = () => {
 
   useEffect(() => {
     getAdvancedCategories()
-    getCategory()
   }, [])
 
   return (
