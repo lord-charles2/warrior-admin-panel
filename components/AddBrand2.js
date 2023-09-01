@@ -76,12 +76,9 @@ export default function AddBrand() {
   }
 
   const handleCategoryChange = (event, value) => {
-    // Check if a category is selected (value is not null)
     if (value) {
-      // Update subId with the _id of the selected category
       setSubId(value._id)
     } else {
-      // If no category is selected, set subId to null
       setSubId(null)
     }
   }
