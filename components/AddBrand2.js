@@ -25,6 +25,7 @@ export default function AddBrand() {
   const [collectionName, setCollectionName] = useState('')
   const [subTitle, setSubTitle] = useState('')
   const [categories, setCategories] = useState([])
+  const [subId, setSubId] = useState('')
 
   const subData = {
     name: collectionName,
